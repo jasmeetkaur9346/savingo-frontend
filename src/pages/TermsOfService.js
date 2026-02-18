@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { FileText, Lock, AlertCircle, Zap, Scale, Shield, XCircle, CheckCircle, Mail } from 'lucide-react';
 
 const TermsOfService = () => {
