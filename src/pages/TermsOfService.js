@@ -3,20 +3,20 @@ import { FileText, Lock, AlertCircle, Zap, Scale, Shield, XCircle, CheckCircle, 
 
 const TermsOfService = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+    <div className="bg-gray-50">
+      {/* Page Header */}
+      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-900 border-b border-slate-700">
         <div className="max-w-5xl mx-auto px-6 py-8">
           <div className="flex items-center space-x-4 mb-4">
-            <div className="bg-indigo-100 p-3 rounded-lg">
-              <FileText className="w-8 h-8 text-indigo-600" />
+            <div className="bg-white/10 p-3 rounded-lg border border-white/20">
+              <FileText className="w-8 h-8 text-indigo-200" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Terms of Service</h1>
-              <p className="text-gray-600 mt-1">Savingo: Ledger, Money Manager</p>
+              <h1 className="text-3xl font-bold text-white">Terms of Service</h1>
+              <p className="text-indigo-100/90 mt-1">Savingo: Ledger, Money Manager</p>
             </div>
           </div>
-          <div className="flex items-center space-x-4 text-sm text-gray-500">
+          <div className="flex items-center space-x-4 text-sm text-indigo-100/80">
             <span>Last updated: February 17, 2026</span>
           </div>
         </div>
@@ -181,12 +181,13 @@ const TermsOfService = () => {
         </section>
 
         {/* Footer */}
-        <div className="text-center text-gray-500 text-sm border-t border-gray-200 pt-8">
-          <p>© 2026 Savingo: Ledger, Money Manager. All rights reserved.</p>
-        </div>
+        {/* <div className="text-center text-gray-500 text-sm border-t border-gray-200 pt-8">
+          <p>?? 2026 Savingo: Ledger, Money Manager. All rights reserved.</p>
+        </div> */}
       </div>
     </div>
   );
 };
 
 export default TermsOfService;
+

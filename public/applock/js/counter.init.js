@@ -1,7 +1,17 @@
 // ----- COUNTER ----- //
 var a = 0;
-$(window).scroll(function() {
-    var oTop = $('#counter').offset().top - window.innerHeight;
+$(window).off('scroll.counter').on('scroll.counter', function() {
+    var $counter = $('#counter');
+    if (!$counter.length) {
+        return;
+    }
+
+    var offset = $counter.offset();
+    if (!offset) {
+        return;
+    }
+
+    var oTop = offset.top - window.innerHeight;
     if (a == 0 && $(window).scrollTop() > oTop) {
         $('.counter-value').each(function() {
             var $this = $(this),
