@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from "react";
+import React, { useEffect } from "react";
 
 
 const CSS_FILES = [
@@ -178,7 +178,7 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="mt-2 pt-1 d-flex align-items-center flex-wrap" style={{ gap: "16px" }}>
-                  <a  className="btn" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#fff", height: "52px", padding: "0 24px", fontSize: "16px", fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Training Guide</a>
+                  <button type="button" className="btn" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#fff", height: "52px", padding: "0 24px", fontSize: "16px", fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center", cursor: "default" }}>Training Guide</button>
                   <a href="https://play.google.com/store/apps/details?id=com.jasmeet.accountapp" className="d-inline-flex align-items-center"><img src={getImage("google.png")} alt="Get it on Google Play" style={{ width: "180px", height: "auto", display: "block" }} /></a>
                 </div>
               </div>
