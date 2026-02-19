@@ -178,14 +178,14 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="mt-2 pt-1 d-flex align-items-center flex-wrap" style={{ gap: "16px" }}>
-                  <a href="#" className="btn" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#fff", height: "52px", padding: "0 24px", fontSize: "16px", fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Training Guide</a>
+                  <a href="#services" className="btn" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#fff", height: "52px", padding: "0 24px", fontSize: "16px", fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Training Guide</a>
                   <a href="https://play.google.com/store/apps/details?id=com.jasmeet.accountapp" className="d-inline-flex align-items-center"><img src={getImage("google.png")} alt="Get it on Google Play" style={{ width: "180px", height: "auto", display: "block" }} /></a>
                 </div>
               </div>
             </div>{/*end col*/}
             <div className="col-lg-5 col-md-6 mt-4 pt-2">
               <div className="home-img text-md-end">
-                <img src={getImage("home/mobile04.png")} className="img-fluid mover-img" alt />
+                <img src={getImage("home/mobile04.png")} className="img-fluid mover-img" alt="" />
               </div>
             </div>{/*end col*/}
           </div>{/*end row*/}
@@ -193,7 +193,7 @@ export default function Home() {
         <div className="container-fluid">
           <div className="row">
             <div className="home-shape px-0">
-              <img src={getImage("shp01.png")} alt className="img-fluid mx-auto d-block" />
+              <img src={getImage("shp01.png")} alt="" className="img-fluid mx-auto d-block" />
             </div>
           </div>{/*end row*/}
         </div>{/*end container fluid*/}
@@ -206,13 +206,13 @@ export default function Home() {
     <div className="container">
       <div className="row align-items-center">
         <div className="col-md-5">
-          <img src={getImage("ab01.png")} className="img-fluid" data-aos="fade-right" alt />
+          <img src={getImage("ab01.png")} className="img-fluid" data-aos="fade-right" alt="" />
         </div>{/*end col*/}
         <div className="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
           <div className="about-app ms-lg-4" style={{ maxWidth: "550px" }}>
             <h4 className="title text-uppercase mt-2 mb-3">Manage your expenses within your earnings</h4>
             <p className="text-muted ">Every expense is managed within the earning you add, so your money always stays balanced.  The app tracks withdrawals only from the selected income source, leaving no room for miscalculation. <br /> With a precise timeline based entry system, every transaction is recorded accurately, giving you complete financial clarity and confidence in your numbers.</p>
-            <a href="javascript:void(0)" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
+            <a href="#services" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
           </div>
         </div>{/*end col*/}
       </div>{/*end row*/} 
@@ -222,11 +222,11 @@ export default function Home() {
             <p className="text-muted">Now whenever you give credit or record a payment, entries sync in real time between users. Both sides stay informed about who added the entry and why, removing confusion and misunderstandings. <br />
 
 With built in chat and ledger combined in one system, you can share updates, add notes, and maintain clear communication along with every transaction. A smarter way to manage credit, records, and conversations together in one place.</p>
-            <a href="javascript:void(0)" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
+            <a href="#services" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
           </div>
         </div>{/*end col*/}
         <div className="col-md-5 order-1 order-md-2">
-          <img src={getImage("ab02.png")} className="img-fluid" data-aos="fade-left" alt />
+          <img src={getImage("ab02.png")} className="img-fluid" data-aos="fade-left" alt="" />
         </div>{/*end col*/}
       </div>{/*end row*/}
     </div>{/*end container*/}
@@ -278,7 +278,7 @@ With built in chat and ledger combined in one system, you can share updates, add
         </div>{/*end col*/}
         <div className="col-lg-4 mt-4 pt-2 core-service-img">
           <div className="ms-lg-4 me-lg-4">
-            <img src={getImage("features.png")} className="img-fluid mx-auto" alt />
+            <img src={getImage("features.png")} className="img-fluid mx-auto" alt="" />
           </div>
         </div>{/*end col*/}
         <div className="col-lg-4 col-md-6">
