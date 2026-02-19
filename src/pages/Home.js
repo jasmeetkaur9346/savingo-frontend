@@ -1,739 +1,659 @@
+﻿import React, { useEffect } from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import heroLogo from "../images/Logo.png";
 
-import React, { useMemo } from "react"
-import { Link } from "react-router-dom"
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion"
-import {
-  ShieldCheck,
-  Wallet,
-  LineChart,
-  Cloud,
-  Sparkles,
-  CheckCircle2,
-  ArrowRight,
-  Smartphone,
-  Lock,
-  BadgeCheck,
-  RefreshCcw,
-  FileText,
-  Globe,
-} from "lucide-react"
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 18, filter: "blur(8px)" },
-  show: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { delay: 0.08 * i, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] },
-  }),
+const CSS_FILES = [
+  "/applock/css/bootstrap.min.css",
+  "/applock/css/magnific-popup.css",
+  "/applock/css/materialdesignicons.min.css",
+  "/applock/css/pe-icon-7-stroke.css",
+  "/applock/css/owl.carousel.min.css",
+  "/applock/css/owl.theme.css",
+  "/applock/css/owl.transitions.css",
+  "/applock/css/swiper.min.css",
+  "/applock/css/aos.css",
+  "/applock/css/style.css",
+];
+
+const imageContext = require.context("../assets/images", true);
+const getImage = (assetPath) => imageContext(`./${assetPath}`);
+
+const JS_FILES = [
+  "/applock/js/jquery.min.js",
+  "/applock/js/bootstrap.bundle.min.js",
+  "/applock/js/jquery.easing.min.js",
+  "/applock/js/scrollspy.min.js",
+  "/applock/js/owl.carousel.min.js",
+  "/applock/js/jquery.magnific-popup.min.js",
+  "/applock/js/contact.js",
+  "/applock/js/counter.init.js",
+  "/applock/js/swiper.min.js",
+  "/applock/js/aos.js",
+  "/applock/js/plugin.init.js",
+  "/applock/js/app.js",
+];
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = false;
+    script.dataset.applock = "true";
+    script.onload = () => resolve(script);
+    script.onerror = () => reject(new Error("Failed to load script: " + src));
+    document.body.appendChild(script);
+  });
 }
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  show: (i = 0) => ({
-    opacity: 1,
-    transition: { delay: 0.06 * i, duration: 0.6, ease: [0.2, 0.8, 0.2, 1] },
-  }),
-}
+export default function Home() {
+  useEffect(() => {
+    const links = CSS_FILES.map((href) => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+      link.dataset.applock = "true";
+      document.head.appendChild(link);
+      return link;
+    });
 
-function cn(...classes) {
-  return classes.filter(Boolean).join(" ")
-}
+    let active = true;
 
-function SectionTitle({ eyebrow, title, desc }) {
+    (async () => {
+      for (const src of JS_FILES) {
+        if (!active) break;
+        try {
+          await loadScript(src);
+        } catch (error) {
+          // Keep rendering even if one optional script fails.
+        }
+      }
+    })();
+
+    return () => {
+      active = false;
+      document.querySelectorAll('script[data-applock="true"]').forEach((el) => el.remove());
+      links.forEach((el) => el.remove());
+    };
+  }, []);
+
   return (
-    <div className="mx-auto max-w-3xl text-center">
-      <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 shadow-[0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur">
-        <Sparkles className="h-4 w-4 text-white/80" />
-        <span className="font-medium">{eyebrow}</span>
+<div>
+  {/* Loader */}
+  <div id="preloader">
+    <div id="status">
+      <div className="sk-circle">
+        <div className="sk-circle1 sk-child" />
+        <div className="sk-circle2 sk-child" />
+        <div className="sk-circle3 sk-child" />
+        <div className="sk-circle4 sk-child" />
+        <div className="sk-circle5 sk-child" />
+        <div className="sk-circle6 sk-child" />
+        <div className="sk-circle7 sk-child" />
+        <div className="sk-circle8 sk-child" />
+        <div className="sk-circle9 sk-child" />
+        <div className="sk-circle10 sk-child" />
+        <div className="sk-circle11 sk-child" />
+        <div className="sk-circle12 sk-child" />
       </div>
-      <h2 className="mt-6 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-        {title}
-      </h2>
-      <p className="mt-4 text-pretty text-base leading-relaxed text-white/70 sm:text-lg">
-        {desc}
-      </p>
     </div>
-  )
-}
-
-function GlowButton({ children, href = "#", variant = "primary" }) {
-  const base =
-    "group relative inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-  const primary =
-    "bg-white text-slate-900 shadow-[0_12px_40px_rgba(0,0,0,0.35)] hover:translate-y-[-1px] hover:shadow-[0_18px_60px_rgba(0,0,0,0.45)]"
-  const ghost =
-    "border border-white/15 bg-white/5 text-white hover:bg-white/10 hover:border-white/25"
-
-  return (
-    <a href={href} className={cn(base, variant === "primary" ? primary : ghost)}>
-      <span className="absolute inset-0 overflow-hidden rounded-xl">
-        <span className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-        <span className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/2 -skew-x-12 translate-x-[260%] bg-gradient-to-r from-transparent via-white/25 to-transparent opacity-0 transition-all duration-700 group-hover:opacity-100 group-hover:translate-x-[420%]" />
-      </span>
-      <span className="relative">{children}</span>
-      <ArrowRight className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-    </a>
-  )
-}
-
-function Card({ children, className }) {
-  return (
-    <div
-      className={cn(
-        "relative rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur transition-transform duration-300 hover:translate-y-[-2px]",
-        className
-      )}
-    >
-      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-white/10 to-transparent opacity-0 transition-opacity duration-300 hover:opacity-100" />
-      <div className="relative">{children}</div>
-    </div>
-  )
-}
-
-function StatPill({ label, value }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur">
-      <div className="text-xs font-medium text-white/60">{label}</div>
-      <div className="mt-1 text-lg font-semibold text-white">{value}</div>
-    </div>
-  )
-}
-
-function FAQItem({ q, a, i }) {
-  return (
-    <motion.details
-      variants={fadeUp}
-      custom={i}
-      className="group rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur"
-    >
-      <summary className="cursor-pointer list-none select-none text-base font-semibold text-white/90">
-        <div className="flex items-center justify-between gap-3">
-          <span>{q}</span>
-          <span className="grid h-8 w-8 place-items-center rounded-xl border border-white/10 bg-white/5 text-white/70 transition-all group-open:rotate-45">
-            +
-          </span>
-        </div>
-      </summary>
-      <p className="mt-4 text-sm leading-relaxed text-white/70">{a}</p>
-    </motion.details>
-  )
-}
-
-export default function SavingoLandingPage() {
-  const prefersReducedMotion = useReducedMotion()
-  const { scrollYProgress } = useScroll()
-  const bgY = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, -140])
-  const blob1 = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, 220])
-  const blob2 = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, -200])
-
-  const features = useMemo(
-    () => [
-      {
-        icon: Wallet,
-        title: "Daily expenses and earnings",
-        desc: "Add entries in seconds with clean categories and notes for every transaction.",
-      },
-      {
-        icon: LineChart,
-        title: "Clarity, not chaos",
-        desc: "See spending patterns, income flow, and what you actually saved this month.",
-      },
-      {
-        icon: Cloud,
-        title: "Backup and restore",
-        desc: "Keep your data safe with backup support and quick restore when switching phones.",
-      },
-      {
-        icon: Globe,
-        title: "Currency support",
-        desc: "Track in your preferred currency with simple switching for travel or multi region use.",
-      },
-      {
-        icon: RefreshCcw,
-        title: "Fast and frictionless",
-        desc: "Designed for speed on real life days, not for accountants with infinite patience.",
-      },
-      {
-        icon: ShieldCheck,
-        title: "Privacy first",
-        desc: "Your money data stays yours. No weird sharing, no nonsense.",
-      },
-    ],
-    []
-  )
-
-  const steps = useMemo(
-    () => [
-      {
-        title: "Create your accounts",
-        desc: "Set up salary, cash, wallet, or any account style that matches your real life.",
-        icon: Smartphone,
-      },
-      {
-        title: "Add income, then track spending",
-        desc: "Quick add, notes on every entry, and clean history you can trust.",
-        icon: FileText,
-      },
-      {
-        title: "Review, adjust, save",
-        desc: "Spot the leaks early and keep your monthly spending under control.",
-        icon: LineChart,
-      },
-    ],
-    []
-  )
-
-  const faqs = useMemo(
-    () => [
-      {
-        q: "Is Savingo hard to use",
-        a: "No. The UI is designed to be learned in minutes. Most users feel comfortable the same day.",
-      },
-      {
-        q: "How is my data protected",
-        a: "We focus on privacy by design. Use backup features when needed and keep your access protected with your phone security.",
-      },
-      {
-        q: "Can I write notes on transactions",
-        a: "Yes. Notes are built in so you always remember why that entry happened.",
-      },
-      {
-        q: "Does it support multiple accounts",
-        a: "Yes. Track separate accounts like salary, cash, savings, or anything you want.",
-      },
-    ],
-    []
-  )
-
-  return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <motion.div style={{ y: bgY }} className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,197,94,0.12),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(59,130,246,0.12),transparent_40%),radial-gradient(circle_at_60%_80%,rgba(168,85,247,0.10),transparent_45%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(2,6,23,0.2),rgba(2,6,23,0.95))]" />
-          <div className="absolute inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:48px_48px] [background-position:0_0]" />
-        </motion.div>
-
-        <motion.div
-          style={{ y: blob1 }}
-          className="absolute -left-40 top-16 h-[420px] w-[420px] rounded-full bg-emerald-500/18 blur-[70px]"
-        />
-        <motion.div
-          style={{ y: blob2 }}
-          className="absolute -right-40 top-40 h-[520px] w-[520px] rounded-full bg-blue-500/16 blur-[80px]"
-        />
-      </div>
-
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/40 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-          <a href="#top" className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
-              <span className="text-base font-black tracking-tight text-white">S</span>
-            </div>
-            <div className="leading-tight">
-              <div className="text-sm font-semibold text-white">Savingo</div>
-              <div className="text-xs text-white/60">Personal money tracking</div>
-            </div>
-          </a>
-
-          <nav className="hidden items-center gap-6 text-sm text-white/70 md:flex">
-            <a className="hover:text-white" href="#features">
-              Features
-            </a>
-            <a className="hover:text-white" href="#how">
-              How it works
-            </a>
-            <a className="hover:text-white" href="#screens">
-              Screens
-            </a>
-            <a className="hover:text-white" href="#faq">
-              FAQ
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <a
-              href="#download"
-              className="hidden rounded-xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 md:inline-flex"
-            >
-              Get the app
-            </a>
-            <a
-              href="#download"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-[0_10px_30px_rgba(0,0,0,0.35)] hover:translate-y-[-1px] hover:shadow-[0_16px_50px_rgba(0,0,0,0.45)] transition-all"
-            >
-              Download
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <main id="top" className="relative">
-        <section className="mx-auto max-w-7xl px-5 pb-14 pt-16 sm:pt-20">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <motion.div
-              initial="hidden"
-              animate="show"
-              variants={fadeIn}
-              className="relative"
-            >
-              <motion.div variants={fadeUp} custom={0}>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur">
-                  <BadgeCheck className="h-4 w-4 text-white/80" />
-                  <span>Built for real life spending</span>
+  </div>
+  {/* Loader */}
+    {/* Navbar Start */}
+  <Header />
+  {/* Navbar End */}
+  {/* HOME START*/}
+  <section className="bg-home" style={{ backgroundImage: `url(${getImage("bg-2.jpg")})` }} id="home">
+    <div className="bg-overlay" style={{ backgroundColor: "rgba(148, 163, 184, 0.45)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }} />
+    <div className="home-center">
+      <div className="home-desc-center">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-7 col-md-6">
+              <div className="title-heading">
+                <div className="d-flex align-items-center mb-1" style={{ gap: 0, justifyContent: "flex-start", marginLeft: "0", width: "350px", height: "46px", padding: "0 14px", borderRadius: "999px", overflow: "hidden", background: "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.95) 60%, rgba(255,255,255,0.12) 80%, rgba(255,255,255,0) 92%)" }}>
+                  <img src={heroLogo} alt="Savingo" style={{ height: "56px", width: "auto" }} />
+                  <span style={{ fontSize: "24px", fontWeight: 700, lineHeight: 1, marginLeft: 0, color: "#059669" }}>Savingo</span>
                 </div>
-              </motion.div>
-
-              <motion.h1
-                variants={fadeUp}
-                custom={1}
-                className="mt-6 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl"
-              >
-                Track expenses and earnings
-                <span className="block">
-                  <span className="bg-gradient-to-r from-emerald-300 via-white to-blue-300 bg-clip-text text-transparent">
-                    without the mental mess
+                <h1 className="heading mb-4" style={{ maxWidth: "760px", lineHeight: 1.15, fontSize: "52px", color: "#ffffff", textShadow: "0 1px 2px rgba(15, 23, 42, 0.95), 0 0 1px rgba(15, 23, 42, 0.95)" }}>Built for daily money control and real savings</h1>
+                <div className="mb-4">
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: "32px", width: "fit-content", maxWidth: "100%", padding: "8px 18px" , color: "#ecfdf5", fontSize: "20px", fontWeight: 700, letterSpacing: "0.2px" }}>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><span style={{ width: "7px", height: "7px", borderRadius: "999px", backgroundColor: "#34d399", boxShadow: "0 0 0 3px rgba(16,185,129,0.20)" }} />100% free</span>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><span style={{ width: "7px", height: "7px", borderRadius: "999px", backgroundColor: "#34d399", boxShadow: "0 0 0 3px rgba(16,185,129,0.20)" }} />No Ads</span>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}><span style={{ width: "7px", height: "7px", borderRadius: "999px", backgroundColor: "#34d399", boxShadow: "0 0 0 3px rgba(16,185,129,0.20)" }} />No subscriptions</span>
                   </span>
-                </span>
-              </motion.h1>
-
-              <motion.p
-                variants={fadeUp}
-                custom={2}
-                className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/70 sm:text-lg"
-              >
-                Savingo helps you record daily spending and income, add notes, manage multiple accounts,
-                and keep your money story clean and readable.
-              </motion.p>
-
-              <motion.div variants={fadeUp} custom={3} className="mt-8 flex flex-wrap gap-3">
-                <GlowButton href="#download">Download from Google Play</GlowButton>
-                <GlowButton href="#features" variant="ghost">
-                  Explore features
-                </GlowButton>
-              </motion.div>
-
-              <motion.div variants={fadeUp} custom={4} className="mt-10 grid grid-cols-3 gap-3 max-w-xl">
-                <StatPill label="Setup time" value="Under 2 min" />
-                <StatPill label="Daily entry" value="10 sec" />
-                <StatPill label="Focus" value="Clarity" />
-              </motion.div>
-
-              <motion.div
-                variants={fadeUp}
-                custom={5}
-                className="mt-8 flex items-center gap-3 text-sm text-white/70"
-              >
-                <Lock className="h-4 w-4" />
-                <span>Privacy focused design with backup support</span>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
-              className="relative"
-            >
-              <div className="relative mx-auto max-w-md">
-                <div className="absolute -inset-6 rounded-[32px] bg-gradient-to-b from-white/10 to-transparent blur-2xl" />
-                <div className="relative rounded-[32px] border border-white/12 bg-white/5 p-4 shadow-[0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur">
-                  <div className="rounded-[28px] bg-slate-900/60 p-4">
-                    <div className="flex items-center justify-between">
-                      <div className="text-sm font-semibold text-white/90">Savingo</div>
-                      <div className="text-xs text-white/60">Today</div>
-                    </div>
-
-                    <div className="mt-4 grid grid-cols-2 gap-3">
-                      <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                        <div className="text-xs text-white/60">Income</div>
-                        <div className="mt-2 text-xl font-semibold text-white">₹ 3,200</div>
-                        <div className="mt-2 text-xs text-emerald-300/90">On track</div>
-                      </div>
-                      <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                        <div className="text-xs text-white/60">Expense</div>
-                        <div className="mt-2 text-xl font-semibold text-white">₹ 1,180</div>
-                        <div className="mt-2 text-xs text-blue-300/90">Controlled</div>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
-                      <div className="flex items-center justify-between">
-                        <div className="text-sm font-semibold text-white/90">Recent entries</div>
-                        <div className="text-xs text-white/60">Notes supported</div>
-                      </div>
-
-                      <div className="mt-3 space-y-2">
-                        {[
-                          { t: "Groceries", n: "Weekly", v: "₹ 480" },
-                          { t: "Fuel", n: "Commute", v: "₹ 250" },
-                          { t: "Coffee", n: "Work", v: "₹ 120" },
-                        ].map((x) => (
-                          <div
-                            key={x.t}
-                            className="flex items-center justify-between rounded-xl border border-white/10 bg-slate-950/30 px-3 py-2"
-                          >
-                            <div>
-                              <div className="text-sm text-white/90">{x.t}</div>
-                              <div className="text-xs text-white/60">{x.n}</div>
-                            </div>
-                            <div className="text-sm font-semibold text-white">{x.v}</div>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="mt-4 grid grid-cols-2 gap-3">
-                        <button className="rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 transition-all hover:translate-y-[-1px] hover:shadow-[0_14px_40px_rgba(0,0,0,0.35)]">
-                          Add entry
-                        </button>
-                        <button className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10">
-                          View summary
-                        </button>
-                      </div>
-                    </div>
-
-                    <motion.div
-                      aria-hidden
-                      className="mt-4 flex items-center justify-center gap-2 text-xs text-white/60"
-                      animate={prefersReducedMotion ? {} : { opacity: [0.4, 1, 0.4] }}
-                      transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-300/80" />
-                      <span>Fast, simple, reliable</span>
-                    </motion.div>
-                  </div>
+                </div>
+                <div className="mt-2 pt-1 d-flex align-items-center flex-wrap" style={{ gap: "16px" }}>
+                  <a href="#" className="btn" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#fff", height: "58px", padding: "0 24px", fontSize: "16px", fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>App Training Guide</a>
+                  <a href="#" className="d-inline-flex align-items-center"><img src={getImage("google.png")} alt="Get it on Google Play" style={{ width: "210px", height: "auto", display: "block" }} /></a>
                 </div>
               </div>
-
-              <motion.div
-                className="absolute -bottom-10 -right-10 hidden h-24 w-24 rounded-3xl border border-white/10 bg-white/5 backdrop-blur lg:block"
-                animate={prefersReducedMotion ? {} : { rotate: [0, 6, 0], y: [0, -6, 0] }}
-                transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute -top-10 -left-10 hidden h-20 w-20 rounded-3xl border border-white/10 bg-white/5 backdrop-blur lg:block"
-                animate={prefersReducedMotion ? {} : { rotate: [0, -6, 0], y: [0, 6, 0] }}
-                transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </motion.div>
+            </div>{/*end col*/}
+            <div className="col-lg-5 col-md-6 mt-4 pt-2">
+              <div className="home-img text-md-end">
+                <img src={getImage("home/mobile04.png")} className="img-fluid mover-img" alt />
+              </div>
+            </div>{/*end col*/}
+          </div>{/*end row*/}
+        </div>{/*end container*/}
+        <div className="container-fluid">
+          <div className="row">
+            <div className="home-shape px-0">
+              <img src={getImage("shp01.png")} alt className="img-fluid mx-auto d-block" />
+            </div>
+          </div>{/*end row*/}
+        </div>{/*end container fluid*/}
+      </div>{/*end home desc center*/}
+    </div>{/*end home center*/}
+  </section>{/*end section*/}
+  {/* HOME END*/}
+  {/* About Start */}
+  <section className="section">
+    <div className="container">
+      <div className="row align-items-center">
+        <div className="col-md-5">
+          <img src={getImage("ab01.png")} className="img-fluid" data-aos="fade-right" alt />
+        </div>{/*end col*/}
+        <div className="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
+          <div className="about-app ms-lg-4">
+            <i className="mdi mdi-material-design text-custom h2" />
+            <h4 className="title text-uppercase mt-2 mb-3">Manage your expenses within your earnings</h4>
+            <p className="text-muted">Every expense is managed within the earning you add, so your money always stays balanced. The app tracks withdrawals only from the selected income source, leaving no room for miscalculation. With a precise timeline based entry system, every transaction is recorded accurately, giving you complete financial clarity and confidence in your numbers.</p>
+            <a href="javascript:void(0)" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
           </div>
-        </section>
+        </div>{/*end col*/}
+      </div>{/*end row*/} 
+      <div className="row mt-5 align-items-center">
+        <div className="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0 order-2 order-md-1">
+          <div className="about-app me-lg-4">
+            <i className="mdi mdi-arch text-custom h2" />
+            <h4 className="title text-uppercase mt-2 mb-3">Introducing Ledger Talk</h4>
+            <p className="text-muted">Now whenever you give credit or record a payment, entries sync in real time between users. Both sides stay informed about who added the entry and why, removing confusion and misunderstandings.
 
-        <section id="features" className="mx-auto max-w-7xl px-5 py-16">
-          <SectionTitle
-            eyebrow="Features"
-            title="Everything you need to track money with confidence"
-            desc="Designed for speed, clarity, and daily consistency, so your finances stop feeling mysterious."
-          />
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={fadeIn}
-            className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {features.map((f, i) => {
-              const Icon = f.icon
-              return (
-                <motion.div key={f.title} variants={fadeUp} custom={i}>
-                  <Card>
-                    <div className="flex items-start gap-4">
-                      <div className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-white/5">
-                        <Icon className="h-5 w-5 text-white/85" />
-                      </div>
-                      <div>
-                        <div className="text-base font-semibold text-white/90">{f.title}</div>
-                        <div className="mt-2 text-sm leading-relaxed text-white/70">{f.desc}</div>
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              )
-            })}
-          </motion.div>
-        </section>
-
-        <section id="how" className="mx-auto max-w-7xl px-5 py-16">
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-            <div>
-              <SectionTitle
-                eyebrow="How it works"
-                title="A simple loop you can actually stick with"
-                desc="Make a habit that takes seconds, then let the app turn it into insight."
-              />
-
-              <motion.div
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: "-80px" }}
-                variants={fadeIn}
-                className="mt-10 space-y-4"
-              >
-                {steps.map((s, i) => {
-                  const Icon = s.icon
-                  return (
-                    <motion.div key={s.title} variants={fadeUp} custom={i}>
-                      <Card className="p-5">
-                        <div className="flex items-start gap-4">
-                          <div className="grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-white/5">
-                            <Icon className="h-5 w-5 text-white/85" />
-                          </div>
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm font-semibold text-white/90">{s.title}</span>
-                              <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-white/70">
-                                Step {i + 1}
-                              </span>
-                            </div>
-                            <p className="mt-2 text-sm leading-relaxed text-white/70">{s.desc}</p>
-                          </div>
-                        </div>
-                      </Card>
-                    </motion.div>
-                  )
-                })}
-              </motion.div>
-            </div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              variants={fadeIn}
-              className="relative"
-            >
-              <Card className="p-0 overflow-hidden">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(34,197,94,0.20),transparent_50%),radial-gradient(circle_at_90%_30%,rgba(59,130,246,0.18),transparent_45%)]" />
-                  <div className="relative p-8">
-                    <div className="flex items-center gap-3">
-                      <div className="grid h-10 w-10 place-items-center rounded-2xl border border-white/10 bg-white/5">
-                        <ShieldCheck className="h-5 w-5 text-white/85" />
-                      </div>
-                      <div>
-                        <div className="text-sm font-semibold text-white/90">A calmer money system</div>
-                        <div className="text-xs text-white/60">Built to reduce anxiety</div>
-                      </div>
-                    </div>
-
-                    <div className="mt-8 grid gap-4">
-                      {[
-                        { t: "Notes on every transaction", d: "You always know the story behind the number." },
-                        { t: "Multiple accounts", d: "Separate salary, cash, savings, and more." },
-                        { t: "Backup ready", d: "Recover safely when devices change." },
-                      ].map((x, idx) => (
-                        <motion.div key={x.t} variants={fadeUp} custom={idx}>
-                          <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-                            <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-300/90" />
-                            <div>
-                              <div className="text-sm font-semibold text-white/90">{x.t}</div>
-                              <div className="mt-1 text-sm text-white/70">{x.d}</div>
-                            </div>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    <div className="mt-8 flex flex-wrap gap-3">
-                      <div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/75">
-                        <Lock className="h-4 w-4" />
-                        <span>Privacy focused</span>
-                      </div>
-                      <div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/75">
-                        <Cloud className="h-4 w-4" />
-                        <span>Backup support</span>
-                      </div>
-                      <div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/75">
-                        <Wallet className="h-4 w-4" />
-                        <span>Daily tracking</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
+With built in chat and ledger combined in one system, you can share updates, add notes, and maintain clear communication along with every transaction. A smarter way to manage credit, records, and conversations together in one place.</p>
+            <a href="javascript:void(0)" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
           </div>
-        </section>
-
-        <section id="screens" className="mx-auto max-w-7xl px-5 py-16">
-          <SectionTitle
-            eyebrow="Screens"
-            title="Show the app, build trust"
-            desc="Replace these placeholders with real Savingo screenshots for maximum conversion."
-          />
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={fadeIn}
-            className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {["Dashboard", "Add entry", "Accounts", "History", "Insights", "Backup"].map((t, i) => (
-              <motion.div key={t} variants={fadeUp} custom={i}>
-                <Card className="p-4">
-                  <div className="aspect-[9/16] w-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/10 to-transparent">
-                    <div className="h-full w-full bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.10),transparent_45%),radial-gradient(circle_at_70%_60%,rgba(255,255,255,0.06),transparent_45%)]" />
-                  </div>
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="text-sm font-semibold text-white/90">{t}</div>
-                    <div className="text-xs text-white/60">Screenshot</div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </section>
-
-        <section id="download" className="mx-auto max-w-7xl px-5 py-16">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={fadeIn}
-            className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur sm:p-12"
-          >
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,197,94,0.16),transparent_50%),radial-gradient(circle_at_80%_30%,rgba(59,130,246,0.14),transparent_45%)]" />
-            <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center">
-              <div>
-                <h3 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                  Start tracking today and feel the difference this month
-                </h3>
-                <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-white/70 sm:text-lg">
-                  Savingo is built for consistent daily tracking, so you always know where your money is going.
-                </p>
-
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <GlowButton href="#">Download from Google Play</GlowButton>
-                  <GlowButton href="#faq" variant="ghost">
-                    Read FAQ
-                  </GlowButton>
-                </div>
-
-                <div className="mt-8 flex flex-wrap items-center gap-4 text-sm text-white/70">
-                  <div className="inline-flex items-center gap-2">
-                    <BadgeCheck className="h-4 w-4 text-white/80" />
-                    <span>Modern UX</span>
-                  </div>
-                  <div className="inline-flex items-center gap-2">
-                    <Lock className="h-4 w-4 text-white/80" />
-                    <span>Privacy focused</span>
-                  </div>
-                  <div className="inline-flex items-center gap-2">
-                    <Cloud className="h-4 w-4 text-white/80" />
-                    <span>Backup support</span>
-                  </div>
-                </div>
+        </div>{/*end col*/}
+        <div className="col-md-5 order-1 order-md-2">
+          <img src={getImage("ab02.png")} className="img-fluid" data-aos="fade-left" alt />
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* About End */}
+  {/* Feature Start */}
+  <section className="section bg-light" id="services">
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <div className="section-title text-center">
+            <i className="mdi mdi-trophy-outline text-custom h2" />
+            <h4 className="title text-uppercase mt-3 mb-5">App's Features</h4>
+            <p className="text-muted mx-auto para-desc mb-0">Splash your dream color Bring your home to lively Colors. We make it a priotity to offer flexible services to accomodate your needs</p>
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+      <div className="row services align-items-center">
+        <div className="col-lg-4 col-md-6">
+          <div className="core-service">
+            <div className="core-service-content mt-4 pt-2 fea-right text-end">
+              <div className="icon ms-4 mt-4">
+                <i className="mdi mdi-account-multiple" />
               </div>
-
-              <div className="relative">
-                <div className="absolute -inset-6 rounded-[32px] bg-gradient-to-b from-white/15 to-transparent blur-2xl" />
-                <div className="relative rounded-[32px] border border-white/12 bg-slate-950/40 p-6 backdrop-blur">
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm font-semibold text-white/90">Monthly snapshot</div>
-                    <div className="text-xs text-white/60">Example</div>
-                  </div>
-
-                  <div className="mt-4 grid grid-cols-3 gap-3">
-                    <StatPill label="Income" value="₹ 62,000" />
-                    <StatPill label="Expense" value="₹ 38,450" />
-                    <StatPill label="Saved" value="₹ 23,550" />
-                  </div>
-
-                  <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-5">
-                    <div className="text-sm font-semibold text-white/90">Top categories</div>
-                    <div className="mt-3 space-y-3">
-                      {[
-                        { t: "Food", p: "34%" },
-                        { t: "Travel", p: "21%" },
-                        { t: "Bills", p: "17%" },
-                      ].map((x) => (
-                        <div key={x.t} className="space-y-1">
-                          <div className="flex items-center justify-between text-xs text-white/70">
-                            <span>{x.t}</span>
-                            <span>{x.p}</span>
-                          </div>
-                          <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
-                            <div className="h-full w-2/3 rounded-full bg-white/60" />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="mt-5 flex items-center gap-2 text-xs text-white/60">
-                      <ShieldCheck className="h-4 w-4" />
-                      <span>Replace with real data in screenshots</span>
-                    </div>
-                  </div>
-                </div>
+              <div className="content">
+                <h4 className="title mb-2">Income Based Expense Management</h4>
+                <p className="text-muted mb-0">Add income to your earning account and manage multiple expense accounts while tracking exactly where your money is spent.</p>
               </div>
             </div>
-          </motion.div>
-        </section>
-
-        <section id="faq" className="mx-auto max-w-7xl px-5 py-16">
-          <SectionTitle
-            eyebrow="FAQ"
-            title="Quick answers"
-            desc="Keep this short and clear, then add support pages later if needed."
-          />
-
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            variants={fadeIn}
-            className="mx-auto mt-12 grid max-w-3xl gap-4"
-          >
-            {faqs.map((x, i) => (
-              <FAQItem key={x.q} q={x.q} a={x.a} i={i} />
-            ))}
-          </motion.div>
-        </section>
-
-        <footer className="border-t border-white/10 bg-slate-950/40">
-          <div className="mx-auto max-w-7xl px-5 py-10">
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-center gap-3">
-                <div className="grid h-10 w-10 place-items-center rounded-2xl border border-white/10 bg-white/5">
-                  <span className="text-base font-black tracking-tight text-white">S</span>
-                </div>
-                <div className="leading-tight">
-                  <div className="text-sm font-semibold text-white">Savingo</div>
-                  <div className="text-xs text-white/60">Track expenses and earnings</div>
-                </div>
+            <div className="core-service-content mt-4 pt-2 fea-right text-end">
+              <div className="icon ms-4 mt-4">
+                <i className="mdi mdi-image-multiple" />
               </div>
-
-              <div className="flex flex-wrap gap-4 text-sm text-white/70">
-                <Link className="hover:text-white" to="/privacy-policy">
-                  Privacy policy
-                </Link>
-                <Link className="hover:text-white" to="/terms-of-service">
-                  Terms
-                </Link>
-                <a className="hover:text-white" href="mailto:savingo@gmail.com">
-                  Contact
-                </a>
+              <div className="content">
+                <h4 className="title mb-2">Timeline Based Balance System</h4>
+                <p className="text-muted mb-0">Add backdated entries with full timeline accuracy where withdrawals only happen if balance existed, keeping accounts always correct and never negative.</p>
               </div>
             </div>
-
-            <div className="mt-8 text-xs text-white/50">
-              © {new Date().getFullYear()} Savingo. All rights reserved.
+            <div className="core-service-content mt-4 pt-2 fea-right text-end">
+              <div className="icon ms-4 mt-4">
+                <i className="mdi mdi-apps" />
+              </div>
+              <div className="content">
+                <h4 className="title mb-2">Smart Savings Account Control</h4>
+                <p className="text-muted mb-0">Manually add savings and transfer them to other accounts anytime to grow and manage your savings with full control.</p>
+              </div>
             </div>
           </div>
-        </footer>
-      </main>
-    </div>
-  )
+        </div>{/*end col*/}
+        <div className="col-lg-4 mt-4 pt-2 core-service-img">
+          <div className="ms-lg-4 me-lg-4">
+            <img src={getImage("features.png")} className="img-fluid mx-auto" alt />
+          </div>
+        </div>{/*end col*/}
+        <div className="col-lg-4 col-md-6">
+          <div className="core-service">
+            <div className="core-service-content mt-4 pt-2 fea-left">
+              <div className="icon me-4 mt-4">
+                <i className="mdi mdi-cellphone-link" />
+              </div>
+              <div className="content">
+                <h4 className="title mb-2">Quick Period Financial Insights</h4>
+                <p className="text-muted mb-0">View month wise or date specific earnings and expenses instantly to understand your complete financial activity.</p>
+              </div>
+            </div>
+            <div className="core-service-content mt-4 pt-2 fea-left">
+              <div className="icon me-4 mt-4">
+                <i className="mdi mdi-format-list-bulleted" />
+              </div>
+              <div className="content">
+                <h4 className="title mb-2">Ledger Talk With Chat And Credit Entries</h4>
+                <p className="text-muted mb-0">Record credit and debit entries while chatting with contacts inside the app with real time synced updates.</p>
+              </div>
+            </div>
+            <div className="core-service-content mt-4 pt-2 fea-left">
+              <div className="icon me-4 mt-4">
+                <i className="mdi mdi-content-cut" />
+              </div>
+              <div className="content">
+                <h4 className="title mb-2">Powerful Backup And Restore</h4>
+                <p className="text-muted mb-0">Automatic and manual Google backup keeps your data secure, private, and accessible across multiple devices anytime.</p>
+              </div>
+            </div>
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* Feature End */}
+  {/* CTA Start */}
+  <section className="section bg-video bg-cta" style={{ background: `url(${getImage("cta.jpg")}) fixed center center` }} id="video">
+    <div className="bg-overlay" />
+    <div className="container">
+      <div className="row justify-content-center text-center">
+        <div className="col-12">
+          <h5 className="text-light text-uppercase">How We do it. Play And Watch !</h5>
+          <a href="http://vimeo.com/42828845" className="play-btn video-play-icon">
+            <img src={getImage("icon/play-button-light.png")} className="img-fluid mt-4 pt-2" alt />
+          </a>
+          <h6 className="text-white text-uppercase mt-3">View App Promo</h6>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* CTA End */}
+  {/* Available Feature Start */}
+  <section className="section d-none">
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <div className="section-title text-center">
+            <i className="mdi mdi-settings-outline text-custom h2" />
+            <h4 className="title text-uppercase mt-3 mb-5">The App Is Available For</h4>
+            <p className="text-muted mx-auto para-desc mb-0">Splash your dream color Bring your home to lively Colors. We make it a priotity to offer flexible services to accomodate your needs</p>
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+      <div className="row">
+        <div className="col-md-4 mt-4 pt-2">
+          <div className="device-feature device-border text-center">
+            <div className="icon mb-4 position-relative d-inline-block">
+              <img src={getImage("icon/pc.png")} className="img-fluid" alt />
+            </div>
+            <div className="content">
+              <h4 className="title mb-3">PC / Laptop</h4>
+              <p className="text-muted">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            </div>
+          </div>
+        </div>{/*end col*/}
+        <div className="col-md-4 mt-4 pt-2">
+          <div className="device-feature device-border text-center">
+            <div className="icon mb-4 position-relative d-inline-block">
+              <img src={getImage("icon/ipad.png")} className="img-fluid" alt />
+            </div>
+            <div className="content">
+              <h4 className="title mb-3">Tablet / Ipad</h4>
+              <p className="text-muted">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            </div>
+          </div>
+        </div>{/*end col*/}
+        <div className="col-md-4 mt-4 pt-2">
+          <div className="device-feature text-center">
+            <div className="icon mb-4 position-relative d-inline-block">
+              <img src={getImage("icon/app.png")} className="img-fluid" alt />
+            </div>
+            <div className="content">
+              <h4 className="title mb-3">Cell Phone</h4>
+              <p className="text-muted">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            </div>
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+      <div className="row justify-content-center mt-5 pt-2">
+        <div className="col-9">
+          <img src={getImage("mobile-hori.png")} className="img-fluid mover-img" alt />
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* Available Feature Start */}
+  {/* START COUNTER */}
+  <section className="bg-counter d-none" style={{ background: `url(${getImage("counter.jpg")}) fixed center center` }}>
+    <div className="bg-overlay" />
+    <div className="container">
+      <div className="row" id="counter">
+        <div className="col-lg-3 col-md-6 p-4">
+          <div className="counter-box text-center">
+            <div className="counter-icon">
+              <i className="mdi mdi-code-tags text-white" />
+            </div>
+            <h2 className="counter-value mt-3 text-white" data-count={1251}>95</h2>
+            <h5 className="counter-head text-white">Lines of code</h5>
+          </div>{/*end counter box*/}
+        </div>{/*end col*/}
+        <div className="col-lg-3 col-md-6 p-4">
+          <div className="counter-box text-center">
+            <div className="counter-icon">
+              <i className="mdi mdi-heart-outline text-white" />
+            </div>
+            <h2 className="counter-value mt-3 text-white" data-count={1853}>1</h2>
+            <h5 className="counter-head text-white">Social Sharings</h5>
+          </div>{/*end counter box*/}
+        </div>{/*end col*/}
+        <div className="col-lg-3 col-md-6 p-4">
+          <div className="counter-box text-center">
+            <div className="counter-icon">
+              <i className="mdi mdi-progress-download text-white" />
+            </div>
+            <h2 className="counter-value mt-3 text-white" data-count={3467}>11</h2>
+            <h5 className="counter-head text-white">Total Download</h5>
+          </div>{/*end counter box*/}
+        </div>{/*end col*/}
+        <div className="col-lg-3 col-md-6 p-4">
+          <div className="counter-box text-center">
+            <div className="counter-icon">
+              <i className="mdi mdi-star-outline text-white" />
+            </div>
+            <h2 className="counter-value mt-3 text-white" data-count={854}>15</h2>
+            <h5 className="counter-head text-white">Positive ratings</h5>
+          </div>{/*end counter box*/}
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* END COUTER */}
+  {/* START SCREENSHORT*/}
+  <section className="section" id="work">
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <div className="section-title text-center">
+            <i className="mdi mdi-image-filter-vintage text-custom h2" />
+            <h4 className="title text-uppercase mt-3 mb-5">User Oriented Interface</h4>
+            <p className="text-muted mx-auto para-desc mb-0">Splash your dream color Bring your home to lively Colors. We make it a priotity to offer flexible services to accomodate your needs</p>
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+      {/* Swiper */}
+      <div className="row justify-content-center mt-4 pt-2">
+        <div className="col-12 swiper-container">
+          <div className="swiper-wrapper">
+            <div className="swiper-slide"><img src={getImage("sc/1.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/2.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/3.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/4.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/5.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/6.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/7.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/8.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/9.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/10.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/11.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/12.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/13.png")} className="img-fluid" alt /></div>
+          </div>
+          {/* Add Arrows  */}
+          <div className="swiper-button-next">
+            <i className="mdi mdi-chevron-right" />
+          </div>
+          <div className="swiper-button-prev ">
+            <i className="mdi mdi-chevron-left" />
+          </div>
+        </div>
+        <div className="col-lg-5 col-md-5 col-12 mb-0 mb-md-5 mb-4 mb-sm-0">
+          <div className="screenshot-cell">
+            <img src={getImage("sc/mo-sc.png")} className="img-fluid" alt />
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* END SCREENSHORT */}
+  {/* Testimonail Start */}
+  <section className="section" id="review" style={{ background: `url(${getImage("testi.jpg")}) fixed center center` }}>
+    <div className="bg-overlay" />
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-lg-10">
+          <div className="text-center testi-icon">
+            <i className="mdi mdi-comment-outline text-custom" />
+          </div>
+          <div id="twitter-testi" className="owl-carousel testi-review">
+            <div className="testimonial text-center ms-3 me-3">
+              <div className="content-review">
+                <p className="review font-italic text-white-50 mt-3">" It has roots in a piece of classical Latin literature from 45 BC, making sure there isn't years old. Richard McClintock, a Latin professor atliterature from 45 BC, making sure there isn't years old Hampden-Sydney College in Virginia "</p>
+                <h5 className="name mb-1 mt-3 text-light">Bert Duharty</h5>
+                <img src={getImage("client/01.jpg")} className="img-fluid rounded-pill img-thumbnail mt-3" alt />
+              </div>
+            </div>{/*end content*/}
+            <div className="testimonial text-center ms-3 me-3">
+              <div className="content-review">
+                <p className="review font-italic text-white-50 mt-3">" Literature from 45 BC, making sure there making sure there isn't years old in a piece of classical Latin literature from 45 BC, making sure there isn't years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia "</p>
+                <h5 className="name mb-1 mt-3 text-light">Jeson Roy</h5>
+                <img src={getImage("client/02.jpg")} className="img-fluid rounded-pill img-thumbnail mt-3" alt />
+              </div>
+            </div>{/*end content*/}
+            <div className="testimonial text-center ms-3 me-3">
+              <div className="content-review">
+                <p className="review font-italic text-white-50 mt-3">" Classical Latin literature from 45 BC, making literature from literature from 45 BC, making sure there making sure there isn't years old sure there isn't years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia "</p>
+                <h5 className="name mb-1 mt-3 text-light">Kevin Peterson</h5>
+                <img src={getImage("client/03.jpg")} className="img-fluid rounded-pill img-thumbnail mt-3" alt />
+              </div>
+            </div>{/*end content*/}
+          </div>
+        </div> {/* end col */}
+      </div> {/* end row */}
+      <div className="row mt-5 text-center d-none">
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/1.png")} className="img-fluid" alt /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/2.png")} className="img-fluid" alt /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/3.png")} className="img-fluid" alt /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/4.png")} className="img-fluid" alt /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/5.png")} className="img-fluid" alt /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/6.png")} className="img-fluid" alt /></div>
+      </div>
+    </div>{/*end container fluid*/}
+  </section>{/*end section*/}
+  {/* Testimonail End */}
+  {/* Team Start */}
+  <section className="section bg-light" id="team">
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <div className="section-title text-center">
+            <i className="mdi mdi-account-multiple text-custom h2" />
+            <h4 className="title text-uppercase mt-3 mb-5">Creative Minds</h4>
+            <p className="text-muted mx-auto para-desc mb-0">Splash your dream color Bring your home to lively Colors. We make it a priotity to offer flexible services to accomodate your needs</p>
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+      <div className="row">
+        <div className="col-lg-3 col-md-6 col-12 mt-4">
+          <div className="team-layout text-center p-2 pl-3 pr-3">
+            <img src={getImage("team/01.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt />
+            <div className="content">
+              <h4 className="name mt-4 mb-0">Elise Festa</h4>
+              <h6 className="designation font-italic text-muted">CEO of Company</h6>
+              <ul className="list-unstyled mt-3 social-icon mb-0">
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-instagram" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-twitter" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-facebook" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-linkedin" /></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>{/*end col*/}
+        <div className="col-lg-3 col-md-6 col-12 mt-4">
+          <div className="team-layout text-center p-2 pl-3 pr-3">
+            <img src={getImage("team/02.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt />
+            <div className="content">
+              <h4 className="name mt-4 mb-0">John McClane</h4>
+              <h6 className="designation font-italic text-muted">Co-founder</h6>
+              <ul className="list-unstyled mt-3 social-icon mb-0">
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-instagram" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-twitter" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-facebook" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-linkedin" /></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>{/*end col*/}
+        <div className="col-lg-3 col-md-6 col-12 mt-4">
+          <div className="team-layout text-center p-2 pl-3 pr-3">
+            <img src={getImage("team/03.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt />
+            <div className="content">
+              <h4 className="name mt-4 mb-0">Paula Mitchell</h4>
+              <h6 className="designation font-italic text-muted">Lead Designer</h6>
+              <ul className="list-unstyled mt-3 social-icon mb-0">
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-instagram" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-twitter" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-facebook" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-linkedin" /></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>{/*end col*/}
+        <div className="col-lg-3 col-md-6 col-12 mt-4">
+          <div className="team-layout text-center p-2 pl-3 pr-3">
+            <img src={getImage("team/04.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt />
+            <div className="content">
+              <h4 className="name mt-4 mb-0">Mark Robinson</h4>
+              <h6 className="designation font-italic text-muted">Creative Developer</h6>
+              <ul className="list-unstyled mt-3 social-icon mb-0">
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-instagram" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-twitter" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-facebook" /></a></li>
+                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-linkedin" /></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* Team End */}
+
+  {/* CTA Download Start */}
+  <section className="section" style={{ background: `url(${getImage("download.jpg")}) fixed center center` }} id="download">
+    <div className="bg-overlay" />
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <div className="section-title text-center">
+            <i className="mdi mdi-download text-custom h2" />
+            <h4 className="title text-uppercase text-light mt-3 mb-5">App Download</h4>
+            <p className="text-white-50 mx-auto para-desc mb-0">Splash your dream color Bring your home to lively Colors. We make it a priotity to offer flexible services to accomodate your needs</p>
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+      <div className="row justify-content-center">
+        <div className="col-md-10">
+          <ul className="list-unstyled mb-0 app-download text-center">
+            <li className="list-inline-item"><a href="javascript:void(0)"><img src={getImage("apple.png")} className="img-fluid mt-2" alt /></a></li>
+            <li className="list-inline-item"><a href="javascript:void(0)"><img src={getImage("google.png")} className="img-fluid mt-2" alt /></a></li>
+          </ul>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* CTA Download End */}
+  {/* Contact Start */}
+  <section className="section" id="contact">
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <div className="section-title text-center">
+            <i className="mdi mdi-phone text-custom h2" />
+            <h4 className="title text-uppercase mt-3 mb-5">Contact us</h4>
+            <p className="text-muted mx-auto para-desc mb-0">Splash your dream color Bring your home to lively Colors. We make it a priotity to offer flexible services to accomodate your needs</p>
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+      <div className="row justify-content-center mt-4 pt-2">
+        <div className="col-lg-12">
+          <div className="custom-form mb-sm-30">
+            <div id="message" />
+            <form method="post" action="https://themesdesign.in/applock/layouts/php/contact.php" name="contact-form" id="contact-form">
+              <div className="row">
+                <div className="col-lg-4 col-md-6">
+                  <div className="form-group position-relative mb-4">
+                    <input name="name" id="name" type="text" className="form-control" placeholder="Your Name :" />
+                  </div>
+                </div>{/*end col*/}
+                <div className="col-lg-4 col-md-6">
+                  <div className="form-group position-relative mb-4">
+                    <input name="email" id="email" type="email" className="form-control" placeholder="Your email :" />
+                  </div>
+                </div>{/*end col*/}
+                <div className="col-lg-4 col-md-12">
+                  <div className="form-group position-relative mb-4">
+                    <input name="subject" id="subject" className="form-control" placeholder="Your subject :" />
+                  </div>
+                </div>{/*end col*/}
+                <div className="col-md-12">
+                  <div className="form-group position-relative mb-4">
+                    <textarea name="comments" id="comments" rows={4} className="form-control" placeholder="Your Message :" defaultValue={""} />
+                  </div>
+                </div>{/*end col*/}
+              </div>{/*end row*/}
+              <div className="row">
+                <div className="col-sm-12 text-center">
+                  <input type="submit" id="submit" name="send" className="submitBnt btn btn-custom w-100" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }} defaultValue="Submit Message" />
+                  <div id="simple-msg" />
+                </div>{/*end col*/}
+              </div>{/*end row*/}
+            </form>{/*end form*/}
+          </div>{/*end custom-form*/}
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* Contact End */}
+  {/* Google Map Start */}
+  <section className="bg-dark d-none">
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-12 p-0">
+          <div className="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92181.08836756031!2d11.170756608169997!3d43.779936659948945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a541847050f9d%3A0xb662ac3eb7b58c6b!2sPiazza+Della+Libert%C3%A0!5e0!3m2!1sen!2sin!4v1562932112256!5m2!1sen!2sin" style={{border: 0}} allowFullScreen />
+          </div>{/*end map*/}
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* Google Map End */}
+    {/* Footer Start */}
+  <Footer />
+  {/* Footer End */}
+
+  {/* javascript */}
+  {/* SLIDER */}
+  {/* Magnific Popup */}
+  {/* Contact */}
+  {/* Counter */}
+  {/* Swiper JS */}
+  {/* Animation JS */}
+  {/* Plugin init */}
+  {/* Main Js */}
+</div>
+  );
 }
-
-/*
-Dependencies
-npm i framer-motion lucide-react
-
-Tailwind
-Ensure Tailwind is set up in your React project.
-*/
-
