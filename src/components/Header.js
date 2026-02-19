@@ -9,7 +9,7 @@ const NAV_ITEMS = [
   { label: "Terms of Service", href: "/terms-of-service" },
   // { label: "Showcase", href: "#work" },
   // { label: "Review", href: "#review" },  { label: "Team", href: "#team" },
-  // { label: "Contact", href: "#contact" } testing,
+  // { label: "Contact", href: "#contact" } testing
 ];
 
 const HEADER_OFFSET = 84;
