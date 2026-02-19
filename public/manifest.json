@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Savingo",
+  "name": "Savingo: Ledger, Money Manager",
   "icons": [
     {
       "src": "favicon.ico",
