@@ -5,9 +5,11 @@ import logo from "../images/Logo.png";
 const NAV_ITEMS = [
   { label: "Home", href: "#home" },
   { label: "Features", href: "#services" },
-  { label: "Showcase", href: "#work" },
-  { label: "Review", href: "#review" },  { label: "Team", href: "#team" },
-  { label: "Contact", href: "#contact" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms of Service", href: "/terms-of-service" },
+  // { label: "Showcase", href: "#work" },
+  // { label: "Review", href: "#review" },  { label: "Team", href: "#team" },
+  // { label: "Contact", href: "#contact" },
 ];
 
 const HEADER_OFFSET = 84;
@@ -41,17 +43,22 @@ export default function Header() {
     return () => window.cancelAnimationFrame(rafId);
   }, [location.pathname, location.hash]);
 
-  const handleNavClick = (event, hash) => {
+  const handleNavClick = (event, href) => {
     event.preventDefault();
     setIsOpen(false);
 
-    if (location.pathname !== "/") {
-      navigate(`/${hash}`);
+    if (!href.startsWith("#")) {
+      navigate(href);
       return;
     }
 
-    scrollToSection(hash, true);
-    window.history.replaceState(null, "", hash);
+    if (location.pathname !== "/") {
+      navigate(`/${href}`);
+      return;
+    }
+
+    scrollToSection(href, true);
+    window.history.replaceState(null, "", href);
   };
 
   return (
@@ -66,7 +73,7 @@ export default function Header() {
           {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
-              href={location.pathname === "/" ? item.href : `/${item.href}`}
+              href={item.href.startsWith("#") ? (location.pathname === "/" ? item.href : `/${item.href}`) : item.href}
               onClick={(event) => handleNavClick(event, item.href)}
               className="text-sm font-medium text-slate-700 transition-colors hover:text-slate-900"
             >
@@ -101,7 +108,7 @@ export default function Header() {
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.href}
-                href={location.pathname === "/" ? item.href : `/${item.href}`}
+                href={item.href.startsWith("#") ? (location.pathname === "/" ? item.href : `/${item.href}`) : item.href}
                 onClick={(event) => handleNavClick(event, item.href)}
                 className="rounded-md px-2 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900"
               >
@@ -121,7 +128,6 @@ export default function Header() {
     </header>
   );
 }
-
 
 
 

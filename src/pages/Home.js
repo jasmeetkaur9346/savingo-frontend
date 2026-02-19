@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+﻿import React, { useEffect } from "react";
 
 
 const CSS_FILES = [
@@ -178,7 +178,7 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="mt-2 pt-1 d-flex align-items-center flex-wrap" style={{ gap: "16px" }}>
-                  <a href="#services" className="btn" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#fff", height: "52px", padding: "0 24px", fontSize: "16px", fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Training Guide</a>
+                  <a  className="btn" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#fff", height: "52px", padding: "0 24px", fontSize: "16px", fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>Training Guide</a>
                   <a href="https://play.google.com/store/apps/details?id=com.jasmeet.accountapp" className="d-inline-flex align-items-center"><img src={getImage("google.png")} alt="Get it on Google Play" style={{ width: "180px", height: "auto", display: "block" }} /></a>
                 </div>
               </div>
@@ -212,7 +212,7 @@ export default function Home() {
           <div className="about-app ms-lg-4" style={{ maxWidth: "550px" }}>
             <h4 className="title text-uppercase mt-2 mb-3">Manage your expenses within your earnings</h4>
             <p className="text-muted ">Every expense is managed within the earning you add, so your money always stays balanced.  The app tracks withdrawals only from the selected income source, leaving no room for miscalculation. <br /> With a precise timeline based entry system, every transaction is recorded accurately, giving you complete financial clarity and confidence in your numbers.</p>
-            <a href="#services" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
+            <span className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff", cursor: "default", pointerEvents: "none" }}>Take Control</span>
           </div>
         </div>{/*end col*/}
       </div>{/*end row*/} 
@@ -222,7 +222,7 @@ export default function Home() {
             <p className="text-muted">Now whenever you give credit or record a payment, entries sync in real time between users. Both sides stay informed about who added the entry and why, removing confusion and misunderstandings. <br />
 
 With built in chat and ledger combined in one system, you can share updates, add notes, and maintain clear communication along with every transaction. A smarter way to manage credit, records, and conversations together in one place.</p>
-            <a href="#services" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
+            <span className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff", cursor: "default", pointerEvents: "none" }}>Record & Chat</span>
           </div>
         </div>{/*end col*/}
         <div className="col-md-5 order-1 order-md-2">
@@ -232,6 +232,32 @@ With built in chat and ledger combined in one system, you can share updates, add
     </div>{/*end container*/}
   </section>{/*end section*/}
   {/* About End */}
+  {/* CTA Download Start */}
+  <section className="section" style={{ background: `url(${getImage("download.jpg")}) fixed center center` }} id="download">
+    <div className="bg-overlay" />
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <div className="section-title text-center">
+            <i className="mdi mdi-download text-custom h2" />
+            <h4 className="title text-uppercase text-light mt-3 mb-5">App Download</h4>
+            <p className="text-white mx-auto para-desc mb-0">Take full control of your money with a simple and powerful tracking system built for real daily life. Download Savingo now and start building smarter money habits for a secure financial future.</p>
+          </div>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+      <div className="row justify-content-center">
+        <div className="col-md-10">
+          <ul className="list-unstyled mb-0 app-download text-center">
+            {/* <li className="list-inline-item"><a href="https://www.apple.com/app-store/" target="_blank" rel="noreferrer" aria-label="Download on App Store"><img src={getImage("apple.png")} className="img-fluid mt-2" alt="Download on App Store" /></a></li> */}
+            <li className="list-inline-item"><a href="https://play.google.com/store/apps/details?id=com.jasmeet.accountapp" target="_blank" rel="noreferrer" aria-label="Get it on Google Play"><img src={getImage("google.png")} className="img-fluid mt-2" alt="Get it on Google Play" /></a></li>
+          </ul>
+        </div>{/*end col*/}
+      </div>{/*end row*/}
+    </div>{/*end container*/}
+  </section>{/*end section*/}
+  {/* CTA Download End */}
+
+
   {/* Feature Start */}
  <section className="section bg-light" id="services">
     <div className="container">
@@ -334,31 +360,7 @@ With built in chat and ledger combined in one system, you can share updates, add
   </section> */}
   {/* CTA End */}
 
-   {/* CTA Download Start */}
-  <section className="section" style={{ background: `url(${getImage("download.jpg")}) fixed center center` }} id="download">
-    <div className="bg-overlay" />
-    <div className="container">
-      <div className="row">
-        <div className="col-12">
-          <div className="section-title text-center">
-            <i className="mdi mdi-download text-custom h2" />
-            <h4 className="title text-uppercase text-light mt-3 mb-5">App Download</h4>
-            <p className="text-white-50 mx-auto para-desc mb-0">Splash your dream color Bring your home to lively Colors. We make it a priotity to offer flexible services to accomodate your needs</p>
-          </div>
-        </div>{/*end col*/}
-      </div>{/*end row*/}
-      <div className="row justify-content-center">
-        <div className="col-md-10">
-          <ul className="list-unstyled mb-0 app-download text-center">
-            {/* <li className="list-inline-item"><a href="https://www.apple.com/app-store/" target="_blank" rel="noreferrer" aria-label="Download on App Store"><img src={getImage("apple.png")} className="img-fluid mt-2" alt="Download on App Store" /></a></li> */}
-            <li className="list-inline-item"><a href="https://play.google.com/store/apps/details?id=com.jasmeet.accountapp" target="_blank" rel="noreferrer" aria-label="Get it on Google Play"><img src={getImage("google.png")} className="img-fluid mt-2" alt="Get it on Google Play" /></a></li>
-          </ul>
-        </div>{/*end col*/}
-      </div>{/*end row*/}
-    </div>{/*end container*/}
-  </section>{/*end section*/}
-  {/* CTA Download End */}
-
+ 
   {/* Available Feature Start */}
   <section className="section d-none">
     <div className="container">
@@ -459,56 +461,7 @@ With built in chat and ledger combined in one system, you can share updates, add
     </div>{/*end container*/}
   </section>{/*end section*/}
   {/* END COUTER */}
-  {/* START SCREENSHORT*/}
-  <section className="section" id="work">
-    <div className="container">
-      <div className="row">
-        <div className="col-12">
-          <div className="section-title text-center">
-            <i className="mdi mdi-image-filter-vintage text-custom h2" />
-            <h4 className="title text-uppercase mt-3 mb-5">User Oriented Interface</h4>
-            <p className="text-muted mx-auto para-desc mb-0">Splash your dream color Bring your home to lively Colors. We make it a priotity to offer flexible services to accomodate your needs</p>
-          </div>
-        </div>{/*end col*/}
-      </div>{/*end row*/}
-      {/* Swiper */}
-      <div className="row justify-content-center mt-4 pt-2">
-        <div className="col-12 swiper-container">
-          <div className="swiper-wrapper">
-            <div className="swiper-slide"><img src={getImage("sc/1.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/2.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/3.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/4.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/5.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/6.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/7.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/8.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/9.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/10.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/11.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/12.png")} className="img-fluid" alt="" /></div>
-            <div className="swiper-slide"><img src={getImage("sc/13.png")} className="img-fluid" alt="" /></div>
-          </div>
-          {/* Add Arrows  */}
-          <div className="swiper-button-next">
-            <i className="mdi mdi-chevron-right" />
-          </div>
-          <div className="swiper-button-prev ">
-            <i className="mdi mdi-chevron-left" />
-          </div>
-        </div>
-        <div className="col-lg-5 col-md-5 col-12 mb-0 mb-md-5 mb-4 mb-sm-0">
-          <div className="screenshot-cell">
-            <img src={getImage("sc/mo-sc.png")} className="img-fluid" alt="" />
-          </div>
-        </div>{/*end col*/}
-      </div>{/*end row*/}
-    </div>{/*end container*/}
-  </section>{/*end section*/}
-  {/* END SCREENSHORT */}
-
-
-  {/* Testimonail Start */}
+{/* Testimonail Start */}
   {/* <section className="section" id="review" style={{ background: `url(${getImage("testi.jpg")}) fixed center center` }}>
     <div className="bg-overlay" />
     <div className="container">
@@ -715,4 +668,8 @@ With built in chat and ledger combined in one system, you can share updates, add
 </div>
   );
 }
+
+
+
+
 
