@@ -1,7 +1,4 @@
 import React, { useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import heroLogo from "../images/Logo.png";
 
 
 const CSS_FILES = [
