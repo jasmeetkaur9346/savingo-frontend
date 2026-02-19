@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import heroLogo from "../images/Logo.png";
@@ -125,14 +125,14 @@ export default function Home() {
                   </span>
                 </div>
                 <div className="mt-2 pt-1 d-flex align-items-center flex-wrap" style={{ gap: "16px" }}>
-                  <a href="#" className="btn" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#fff", height: "58px", padding: "0 24px", fontSize: "16px", fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>App Training Guide</a>
-                  <a href="#" className="d-inline-flex align-items-center"><img src={getImage("google.png")} alt="Get it on Google Play" style={{ width: "210px", height: "auto", display: "block" }} /></a>
+                  <a href="#services" className="btn" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#fff", height: "58px", padding: "0 24px", fontSize: "16px", fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>App Training Guide</a>
+                  <a href="https://play.google.com/store" target="_blank" rel="noreferrer" className="d-inline-flex align-items-center" aria-label="Get it on Google Play"><img src={getImage("google.png")} alt="Get it on Google Play" style={{ width: "210px", height: "auto", display: "block" }} /></a>
                 </div>
               </div>
             </div>{/*end col*/}
             <div className="col-lg-5 col-md-6 mt-4 pt-2">
               <div className="home-img text-md-end">
-                <img src={getImage("home/mobile04.png")} className="img-fluid mover-img" alt />
+                <img src={getImage("home/mobile04.png")} className="img-fluid mover-img" alt="" />
               </div>
             </div>{/*end col*/}
           </div>{/*end row*/}
@@ -140,7 +140,7 @@ export default function Home() {
         <div className="container-fluid">
           <div className="row">
             <div className="home-shape px-0">
-              <img src={getImage("shp01.png")} alt className="img-fluid mx-auto d-block" />
+              <img src={getImage("shp01.png")} alt="" className="img-fluid mx-auto d-block" />
             </div>
           </div>{/*end row*/}
         </div>{/*end container fluid*/}
@@ -153,14 +153,14 @@ export default function Home() {
     <div className="container">
       <div className="row align-items-center">
         <div className="col-md-5">
-          <img src={getImage("ab01.png")} className="img-fluid" data-aos="fade-right" alt />
+          <img src={getImage("ab01.png")} className="img-fluid" data-aos="fade-right" alt="" />
         </div>{/*end col*/}
         <div className="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
           <div className="about-app ms-lg-4">
             <i className="mdi mdi-material-design text-custom h2" />
             <h4 className="title text-uppercase mt-2 mb-3">Manage your expenses within your earnings</h4>
             <p className="text-muted">Every expense is managed within the earning you add, so your money always stays balanced. The app tracks withdrawals only from the selected income source, leaving no room for miscalculation. With a precise timeline based entry system, every transaction is recorded accurately, giving you complete financial clarity and confidence in your numbers.</p>
-            <a href="javascript:void(0)" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
+            <a href="#services" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
           </div>
         </div>{/*end col*/}
       </div>{/*end row*/} 
@@ -172,11 +172,11 @@ export default function Home() {
             <p className="text-muted">Now whenever you give credit or record a payment, entries sync in real time between users. Both sides stay informed about who added the entry and why, removing confusion and misunderstandings.
 
 With built in chat and ledger combined in one system, you can share updates, add notes, and maintain clear communication along with every transaction. A smarter way to manage credit, records, and conversations together in one place.</p>
-            <a href="javascript:void(0)" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
+            <a href="#services" className="btn btn-custom mt-2" style={{ backgroundColor: "#059669", borderColor: "#059669", color: "#ffffff" }}>Learn More</a>
           </div>
         </div>{/*end col*/}
         <div className="col-md-5 order-1 order-md-2">
-          <img src={getImage("ab02.png")} className="img-fluid" data-aos="fade-left" alt />
+          <img src={getImage("ab02.png")} className="img-fluid" data-aos="fade-left" alt="" />
         </div>{/*end col*/}
       </div>{/*end row*/}
     </div>{/*end container*/}
@@ -228,7 +228,7 @@ With built in chat and ledger combined in one system, you can share updates, add
         </div>{/*end col*/}
         <div className="col-lg-4 mt-4 pt-2 core-service-img">
           <div className="ms-lg-4 me-lg-4">
-            <img src={getImage("features.png")} className="img-fluid mx-auto" alt />
+            <img src={getImage("features.png")} className="img-fluid mx-auto" alt="" />
           </div>
         </div>{/*end col*/}
         <div className="col-lg-4 col-md-6">
@@ -274,7 +274,7 @@ With built in chat and ledger combined in one system, you can share updates, add
         <div className="col-12">
           <h5 className="text-light text-uppercase">How We do it. Play And Watch !</h5>
           <a href="http://vimeo.com/42828845" className="play-btn video-play-icon">
-            <img src={getImage("icon/play-button-light.png")} className="img-fluid mt-4 pt-2" alt />
+            <img src={getImage("icon/play-button-light.png")} className="img-fluid mt-4 pt-2" alt="" />
           </a>
           <h6 className="text-white text-uppercase mt-3">View App Promo</h6>
         </div>{/*end col*/}
@@ -298,7 +298,7 @@ With built in chat and ledger combined in one system, you can share updates, add
         <div className="col-md-4 mt-4 pt-2">
           <div className="device-feature device-border text-center">
             <div className="icon mb-4 position-relative d-inline-block">
-              <img src={getImage("icon/pc.png")} className="img-fluid" alt />
+              <img src={getImage("icon/pc.png")} className="img-fluid" alt="" />
             </div>
             <div className="content">
               <h4 className="title mb-3">PC / Laptop</h4>
@@ -309,7 +309,7 @@ With built in chat and ledger combined in one system, you can share updates, add
         <div className="col-md-4 mt-4 pt-2">
           <div className="device-feature device-border text-center">
             <div className="icon mb-4 position-relative d-inline-block">
-              <img src={getImage("icon/ipad.png")} className="img-fluid" alt />
+              <img src={getImage("icon/ipad.png")} className="img-fluid" alt="" />
             </div>
             <div className="content">
               <h4 className="title mb-3">Tablet / Ipad</h4>
@@ -320,7 +320,7 @@ With built in chat and ledger combined in one system, you can share updates, add
         <div className="col-md-4 mt-4 pt-2">
           <div className="device-feature text-center">
             <div className="icon mb-4 position-relative d-inline-block">
-              <img src={getImage("icon/app.png")} className="img-fluid" alt />
+              <img src={getImage("icon/app.png")} className="img-fluid" alt="" />
             </div>
             <div className="content">
               <h4 className="title mb-3">Cell Phone</h4>
@@ -331,7 +331,7 @@ With built in chat and ledger combined in one system, you can share updates, add
       </div>{/*end row*/}
       <div className="row justify-content-center mt-5 pt-2">
         <div className="col-9">
-          <img src={getImage("mobile-hori.png")} className="img-fluid mover-img" alt />
+          <img src={getImage("mobile-hori.png")} className="img-fluid mover-img" alt="" />
         </div>{/*end col*/}
       </div>{/*end row*/}
     </div>{/*end container*/}
@@ -398,19 +398,19 @@ With built in chat and ledger combined in one system, you can share updates, add
       <div className="row justify-content-center mt-4 pt-2">
         <div className="col-12 swiper-container">
           <div className="swiper-wrapper">
-            <div className="swiper-slide"><img src={getImage("sc/1.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/2.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/3.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/4.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/5.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/6.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/7.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/8.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/9.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/10.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/11.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/12.png")} className="img-fluid" alt /></div>
-            <div className="swiper-slide"><img src={getImage("sc/13.png")} className="img-fluid" alt /></div>
+            <div className="swiper-slide"><img src={getImage("sc/1.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/2.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/3.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/4.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/5.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/6.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/7.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/8.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/9.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/10.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/11.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/12.png")} className="img-fluid" alt="" /></div>
+            <div className="swiper-slide"><img src={getImage("sc/13.png")} className="img-fluid" alt="" /></div>
           </div>
           {/* Add Arrows  */}
           <div className="swiper-button-next">
@@ -422,7 +422,7 @@ With built in chat and ledger combined in one system, you can share updates, add
         </div>
         <div className="col-lg-5 col-md-5 col-12 mb-0 mb-md-5 mb-4 mb-sm-0">
           <div className="screenshot-cell">
-            <img src={getImage("sc/mo-sc.png")} className="img-fluid" alt />
+            <img src={getImage("sc/mo-sc.png")} className="img-fluid" alt="" />
           </div>
         </div>{/*end col*/}
       </div>{/*end row*/}
@@ -443,33 +443,33 @@ With built in chat and ledger combined in one system, you can share updates, add
               <div className="content-review">
                 <p className="review font-italic text-white-50 mt-3">" It has roots in a piece of classical Latin literature from 45 BC, making sure there isn't years old. Richard McClintock, a Latin professor atliterature from 45 BC, making sure there isn't years old Hampden-Sydney College in Virginia "</p>
                 <h5 className="name mb-1 mt-3 text-light">Bert Duharty</h5>
-                <img src={getImage("client/01.jpg")} className="img-fluid rounded-pill img-thumbnail mt-3" alt />
+                <img src={getImage("client/01.jpg")} className="img-fluid rounded-pill img-thumbnail mt-3" alt="" />
               </div>
             </div>{/*end content*/}
             <div className="testimonial text-center ms-3 me-3">
               <div className="content-review">
                 <p className="review font-italic text-white-50 mt-3">" Literature from 45 BC, making sure there making sure there isn't years old in a piece of classical Latin literature from 45 BC, making sure there isn't years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia "</p>
                 <h5 className="name mb-1 mt-3 text-light">Jeson Roy</h5>
-                <img src={getImage("client/02.jpg")} className="img-fluid rounded-pill img-thumbnail mt-3" alt />
+                <img src={getImage("client/02.jpg")} className="img-fluid rounded-pill img-thumbnail mt-3" alt="" />
               </div>
             </div>{/*end content*/}
             <div className="testimonial text-center ms-3 me-3">
               <div className="content-review">
                 <p className="review font-italic text-white-50 mt-3">" Classical Latin literature from 45 BC, making literature from literature from 45 BC, making sure there making sure there isn't years old sure there isn't years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia "</p>
                 <h5 className="name mb-1 mt-3 text-light">Kevin Peterson</h5>
-                <img src={getImage("client/03.jpg")} className="img-fluid rounded-pill img-thumbnail mt-3" alt />
+                <img src={getImage("client/03.jpg")} className="img-fluid rounded-pill img-thumbnail mt-3" alt="" />
               </div>
             </div>{/*end content*/}
           </div>
         </div> {/* end col */}
       </div> {/* end row */}
       <div className="row mt-5 text-center d-none">
-        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/1.png")} className="img-fluid" alt /></div>
-        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/2.png")} className="img-fluid" alt /></div>
-        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/3.png")} className="img-fluid" alt /></div>
-        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/4.png")} className="img-fluid" alt /></div>
-        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/5.png")} className="img-fluid" alt /></div>
-        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/6.png")} className="img-fluid" alt /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/1.png")} className="img-fluid" alt="" /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/2.png")} className="img-fluid" alt="" /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/3.png")} className="img-fluid" alt="" /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/4.png")} className="img-fluid" alt="" /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/5.png")} className="img-fluid" alt="" /></div>
+        <div className="col-lg-2 col-md-4 col-6"><img src={getImage("client/6.png")} className="img-fluid" alt="" /></div>
       </div>
     </div>{/*end container fluid*/}
   </section>{/*end section*/}
@@ -489,60 +489,60 @@ With built in chat and ledger combined in one system, you can share updates, add
       <div className="row">
         <div className="col-lg-3 col-md-6 col-12 mt-4">
           <div className="team-layout text-center p-2 pl-3 pr-3">
-            <img src={getImage("team/01.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt />
+            <img src={getImage("team/01.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt="" />
             <div className="content">
               <h4 className="name mt-4 mb-0">Elise Festa</h4>
               <h6 className="designation font-italic text-muted">CEO of Company</h6>
               <ul className="list-unstyled mt-3 social-icon mb-0">
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-instagram" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-twitter" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-facebook" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-linkedin" /></a></li>
+                <li className="list-inline-item"><a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><i className="mdi mdi-instagram" /></a></li>
+                <li className="list-inline-item"><a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X (Twitter)"><i className="mdi mdi-twitter" /></a></li>
+                <li className="list-inline-item"><a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><i className="mdi mdi-facebook" /></a></li>
+                <li className="list-inline-item"><a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i className="mdi mdi-linkedin" /></a></li>
               </ul>
             </div>
           </div>
         </div>{/*end col*/}
         <div className="col-lg-3 col-md-6 col-12 mt-4">
           <div className="team-layout text-center p-2 pl-3 pr-3">
-            <img src={getImage("team/02.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt />
+            <img src={getImage("team/02.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt="" />
             <div className="content">
               <h4 className="name mt-4 mb-0">John McClane</h4>
               <h6 className="designation font-italic text-muted">Co-founder</h6>
               <ul className="list-unstyled mt-3 social-icon mb-0">
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-instagram" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-twitter" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-facebook" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-linkedin" /></a></li>
+                <li className="list-inline-item"><a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><i className="mdi mdi-instagram" /></a></li>
+                <li className="list-inline-item"><a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X (Twitter)"><i className="mdi mdi-twitter" /></a></li>
+                <li className="list-inline-item"><a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><i className="mdi mdi-facebook" /></a></li>
+                <li className="list-inline-item"><a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i className="mdi mdi-linkedin" /></a></li>
               </ul>
             </div>
           </div>
         </div>{/*end col*/}
         <div className="col-lg-3 col-md-6 col-12 mt-4">
           <div className="team-layout text-center p-2 pl-3 pr-3">
-            <img src={getImage("team/03.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt />
+            <img src={getImage("team/03.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt="" />
             <div className="content">
               <h4 className="name mt-4 mb-0">Paula Mitchell</h4>
               <h6 className="designation font-italic text-muted">Lead Designer</h6>
               <ul className="list-unstyled mt-3 social-icon mb-0">
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-instagram" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-twitter" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-facebook" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-linkedin" /></a></li>
+                <li className="list-inline-item"><a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><i className="mdi mdi-instagram" /></a></li>
+                <li className="list-inline-item"><a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X (Twitter)"><i className="mdi mdi-twitter" /></a></li>
+                <li className="list-inline-item"><a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><i className="mdi mdi-facebook" /></a></li>
+                <li className="list-inline-item"><a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i className="mdi mdi-linkedin" /></a></li>
               </ul>
             </div>
           </div>
         </div>{/*end col*/}
         <div className="col-lg-3 col-md-6 col-12 mt-4">
           <div className="team-layout text-center p-2 pl-3 pr-3">
-            <img src={getImage("team/04.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt />
+            <img src={getImage("team/04.jpg")} className="img-fluid mx-auto d-block rounded-pill" alt="" />
             <div className="content">
               <h4 className="name mt-4 mb-0">Mark Robinson</h4>
               <h6 className="designation font-italic text-muted">Creative Developer</h6>
               <ul className="list-unstyled mt-3 social-icon mb-0">
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-instagram" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-twitter" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-facebook" /></a></li>
-                <li className="list-inline-item"><a href="javascript:void(0)"><i className="mdi mdi-linkedin" /></a></li>
+                <li className="list-inline-item"><a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><i className="mdi mdi-instagram" /></a></li>
+                <li className="list-inline-item"><a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X (Twitter)"><i className="mdi mdi-twitter" /></a></li>
+                <li className="list-inline-item"><a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><i className="mdi mdi-facebook" /></a></li>
+                <li className="list-inline-item"><a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i className="mdi mdi-linkedin" /></a></li>
               </ul>
             </div>
           </div>
@@ -568,8 +568,8 @@ With built in chat and ledger combined in one system, you can share updates, add
       <div className="row justify-content-center">
         <div className="col-md-10">
           <ul className="list-unstyled mb-0 app-download text-center">
-            <li className="list-inline-item"><a href="javascript:void(0)"><img src={getImage("apple.png")} className="img-fluid mt-2" alt /></a></li>
-            <li className="list-inline-item"><a href="javascript:void(0)"><img src={getImage("google.png")} className="img-fluid mt-2" alt /></a></li>
+            <li className="list-inline-item"><a href="https://www.apple.com/app-store/" target="_blank" rel="noreferrer" aria-label="Download on App Store"><img src={getImage("apple.png")} className="img-fluid mt-2" alt="Download on App Store" /></a></li>
+            <li className="list-inline-item"><a href="https://play.google.com/store" target="_blank" rel="noreferrer" aria-label="Get it on Google Play"><img src={getImage("google.png")} className="img-fluid mt-2" alt="Get it on Google Play" /></a></li>
           </ul>
         </div>{/*end col*/}
       </div>{/*end row*/}
@@ -634,7 +634,7 @@ With built in chat and ledger combined in one system, you can share updates, add
       <div className="row">
         <div className="col-12 p-0">
           <div className="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92181.08836756031!2d11.170756608169997!3d43.779936659948945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a541847050f9d%3A0xb662ac3eb7b58c6b!2sPiazza+Della+Libert%C3%A0!5e0!3m2!1sen!2sin!4v1562932112256!5m2!1sen!2sin" style={{border: 0}} allowFullScreen />
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92181.08836756031!2d11.170756608169997!3d43.779936659948945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a541847050f9d%3A0xb662ac3eb7b58c6b!2sPiazza+Della+Libert%C3%A0!5e0!3m2!1sen!2sin!4v1562932112256!5m2!1sen!2sin" style={{border: 0}} title="Savingo office location map" allowFullScreen />
           </div>{/*end map*/}
         </div>{/*end col*/}
       </div>{/*end row*/}
@@ -657,3 +657,4 @@ With built in chat and ledger combined in one system, you can share updates, add
 </div>
   );
 }
+
