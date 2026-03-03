@@ -43,9 +43,9 @@ const PrivacyPolicy = () => {
           <div className="flex items-start space-x-3 mb-4">
             <Eye className="w-6 h-6 text-indigo-600 mt-1 flex-shrink-0" />
             <div className="flex-1">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Google API Disclosure (Google Drive Access)</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Google API Disclosure (Google Drive AppData Access)</h2>
               <p className="text-gray-700 leading-relaxed mb-6">
-                Our app requests access to your Google Drive to enable the Backup and Restore functionality.
+                Our app requests access to a specific, hidden folder in your Google Drive using the appDataFolder scope to enable the Backup and Restore functionality.
               </p>
 
               <div className="space-y-4">
@@ -54,7 +54,7 @@ const PrivacyPolicy = () => {
                     <CheckCircle className="w-5 h-5 text-green-600" />
                     <h3 className="font-semibold text-gray-900">Data Accessed</h3>
                   </div>
-                  <p className="text-gray-700">We only access a dedicated folder in your Google Drive to store and manage your app's database backup.</p>
+                  <p className="text-gray-700">We only access a dedicated, hidden folder created by Savingo. The app does not have access to your personal files, photos, documents, or any other metadata on your Google Drive.</p>
                 </div>
 
                 <div className="border-l-4 border-blue-500 bg-blue-50 p-5 rounded-r-lg">
@@ -62,7 +62,15 @@ const PrivacyPolicy = () => {
                     <CheckCircle className="w-5 h-5 text-blue-600" />
                     <h3 className="font-semibold text-gray-900">Usage</h3>
                   </div>
-                  <p className="text-gray-700">This access is used strictly to sync your full database and allow data portability across devices.</p>
+                  <p className="text-gray-700">This access is used strictly to store and retrieve your app's database backup to allow data portability across devices.</p>
+                </div>
+
+                 <div className="border-l-4 border-purple-500 bg-purple-50 p-5 rounded-r-lg">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <CheckCircle className="w-5 h-5 text-purple-600" />
+                    <h3 className="font-semibold text-gray-900">Limited Use Requirement</h3>
+                  </div>
+                  <p className="text-gray-700">Savingo's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" className="text-purple-600 hover:text-purple-700 font-semibold">Google API Service User Data Policy</a> , including the Limited Use requirements.</p>
                 </div>
 
                 <div className="border-l-4 border-red-500 bg-red-50 p-5 rounded-r-lg">
@@ -73,13 +81,14 @@ const PrivacyPolicy = () => {
                   <p className="text-gray-700">We do not sell or share any Google user data with third parties or external servers.</p>
                 </div>
 
-                <div className="border-l-4 border-purple-500 bg-purple-50 p-5 rounded-r-lg">
+                 <div className="border-l-4 border-pink-500 bg-pink-50 p-5 rounded-r-lg">
                   <div className="flex items-center space-x-2 mb-3">
-                    <CheckCircle className="w-5 h-5 text-purple-600" />
-                    <h3 className="font-semibold text-gray-900">Limited Use</h3>
+                    <CheckCircle className="w-5 h-5 text-pink-600" />
+                    <h3 className="font-semibold text-gray-900">Advertising</h3>
                   </div>
                   <p className="text-gray-700">Data accessed via Google Drive is never used for advertising, tracking, or user profiling.</p>
                 </div>
+
               </div>
             </div>
           </div>
@@ -145,7 +154,7 @@ const PrivacyPolicy = () => {
                     <CheckCircle className="w-5 h-5 text-yellow-600" />
                     <h3 className="font-semibold text-gray-900">Location</h3>
                   </div>
-                  <p className="text-gray-700">Authentication and profile details are stored in our secure Cloud Database. Your financial backups remain exclusively on your personal Google Drive.</p>
+                  <p className="text-gray-700">Authentication and profile details are stored in our secure Cloud Database. Your financial backups remain exclusively on your personal Google Drive in the hidden AppData folder.</p>
                 </div>
 
                 <div className="border-l-4 border-teal-500 bg-teal-50 p-5 rounded-r-lg">
@@ -173,7 +182,7 @@ const PrivacyPolicy = () => {
                     <CheckCircle className="w-5 h-5 text-cyan-600" />
                     <h3 className="font-semibold text-gray-900">User Control</h3>
                   </div>
-                  <p className="text-gray-700">You can manage and delete your backup files directly from your Google Drive.</p>
+                  <p className="text-gray-700">Users have the right to manage or delete their data within the application.</p>
                 </div>
 
                 <div className="border-l-4 border-red-500 bg-red-50 p-5 rounded-r-lg">
